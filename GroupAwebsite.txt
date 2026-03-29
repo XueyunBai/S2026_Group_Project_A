@@ -1,0 +1,629 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Last Resort Hotel Dashboard</title>
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      font-family: Arial, Helvetica, sans-serif;
+      background: #f5f7fb;
+      color: #1f2937;
+    }
+    .container {
+      max-width: 1280px;
+      margin: 0 auto;
+      padding: 24px;
+    }
+    .header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .header h1 {
+      margin: 0;
+      font-size: 32px;
+    }
+    .header p {
+      margin: 6px 0 0;
+      color: #6b7280;
+    }
+    .date-box {
+      background: white;
+      border-radius: 14px;
+      padding: 14px 18px;
+      box-shadow: 0 4px 14px rgba(0,0,0,0.06);
+      font-size: 14px;
+      color: #4b5563;
+    }
+    .grid-cards {
+      display: grid;
+      grid-template-columns: repeat(5, 1fr);
+      gap: 16px;
+      margin-bottom: 24px;
+    }
+    .card {
+      background: white;
+      border-radius: 18px;
+      padding: 20px;
+      box-shadow: 0 6px 18px rgba(0,0,0,0.06);
+    }
+    .metric-title {
+      font-size: 14px;
+      color: #6b7280;
+      margin-bottom: 10px;
+    }
+    .metric-value {
+      font-size: 30px;
+      font-weight: 700;
+      margin-bottom: 6px;
+    }
+    .metric-sub {
+      font-size: 13px;
+      color: #9ca3af;
+    }
+    .grid-2 {
+      display: grid;
+      grid-template-columns: 1.3fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .grid-bottom {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+      margin-bottom: 16px;
+    }
+    .section-title {
+      font-size: 20px;
+      margin: 0 0 6px;
+    }
+    .section-subtitle {
+      color: #6b7280;
+      font-size: 14px;
+      margin-bottom: 18px;
+    }
+    .bars {
+      display: flex;
+      flex-direction: column;
+      gap: 16px;
+      margin-top: 8px;
+    }
+    .bar-row {
+      display: grid;
+      grid-template-columns: 180px 1fr 60px;
+      align-items: center;
+      gap: 12px;
+      font-size: 14px;
+    }
+    .bar-track {
+      width: 100%;
+      height: 14px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+    .bar-fill {
+      height: 100%;
+      background: linear-gradient(90deg, #2563eb, #60a5fa);
+      border-radius: 999px;
+    }
+    .mini-chart {
+      height: 260px;
+      display: flex;
+      align-items: end;
+      gap: 22px;
+      padding: 12px 8px 0;
+      border-bottom: 1px solid #d1d5db;
+    }
+    .month-col {
+      flex: 1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: end;
+      gap: 10px;
+    }
+    .month-bar {
+      width: 64px;
+      background: linear-gradient(180deg, #0ea5e9, #2563eb);
+      border-radius: 10px 10px 0 0;
+    }
+    .month-label {
+      font-size: 13px;
+      color: #6b7280;
+    }
+    .pie-legend {
+      display: grid;
+      gap: 10px;
+      margin-top: 18px;
+    }
+    .legend-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      font-size: 14px;
+    }
+    .legend-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .dot {
+      width: 12px;
+      height: 12px;
+      border-radius: 50%;
+    }
+    .pie-box {
+      width: 180px;
+      height: 180px;
+      border-radius: 50%;
+      margin: 8px auto 0;
+      background: conic-gradient(
+        #2563eb 0% 54.2%,
+        #10b981 54.2% 85.8%,
+        #f59e0b 85.8% 94.7%,
+        #ef4444 94.7% 100%
+      );
+      position: relative;
+    }
+    .pie-box::after {
+      content: "";
+      position: absolute;
+      inset: 38px;
+      background: white;
+      border-radius: 50%;
+    }
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      font-size: 14px;
+    }
+    th, td {
+      text-align: left;
+      padding: 12px 10px;
+      border-bottom: 1px solid #e5e7eb;
+    }
+    th {
+      color: #6b7280;
+      font-weight: 600;
+      background: #f9fafb;
+    }
+    .status-pill {
+      display: inline-block;
+      padding: 5px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      text-transform: capitalize;
+    }
+    .cleaning { background: #dbeafe; color: #1d4ed8; }
+    .repair { background: #fee2e2; color: #b91c1c; }
+    .renovation { background: #fef3c7; color: #b45309; }
+    .footer-note {
+      margin-top: 10px;
+      color: #6b7280;
+      font-size: 13px;
+    }
+    .detail-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 16px;
+      margin-top: 28px;
+    }
+    @media (max-width: 1100px) {
+      .grid-cards { grid-template-columns: repeat(2, 1fr); }
+      .grid-2, .grid-bottom { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 700px) {
+      .grid-cards { grid-template-columns: 1fr; }
+      .header { flex-direction: column; align-items: flex-start; }
+      .bar-row { grid-template-columns: 120px 1fr 50px; }
+      .month-bar { width: 48px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <div>
+        <h1>Last Resort Hotel Dashboard</h1>
+        <p>Dashboard mockup populated from Group A sample SQL data</p>
+      </div>
+      <div class="date-box">Reporting Period: April–May 2026</div>
+    </div>
+
+    <section class="grid-cards">
+      <div class="card">
+        <div class="metric-title">Total Revenue</div>
+        <div class="metric-value">$7,764</div>
+        <div class="metric-sub">Sum of all charges in the dataset</div>
+      </div>
+      <div class="card">
+        <div class="metric-title">Occupied Rooms</div>
+        <div class="metric-value">3</div>
+        <div class="metric-sub">Rooms currently marked occupied</div>
+      </div>
+      <div class="card">
+        <div class="metric-title">Scheduled Events</div>
+        <div class="metric-value">10</div>
+        <div class="metric-sub">Events in the event table</div>
+      </div>
+      <div class="card">
+        <div class="metric-title">Average Stay Length</div>
+        <div class="metric-value">2.32</div>
+        <div class="metric-sub">Average days between check-in and check-out</div>
+      </div>
+      <div class="card">
+        <div class="metric-title">Unavailable Rooms</div>
+        <div class="metric-value">2</div>
+        <div class="metric-sub">Rooms in cleaning or renovation</div>
+      </div>
+    </section>
+
+    <section class="grid-2">
+      <div class="card">
+        <h2 class="section-title">Sleeping Room Utilization by Wing</h2>
+        <div class="section-subtitle">Share of sleeping rooms that appear in room assignments</div>
+        <div class="bars">
+          <div class="bar-row">
+            <div>East Tower B</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 100%;"></div></div>
+            <div>100%</div>
+          </div>
+          <div class="bar-row">
+            <div>East Tower A</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 75%;"></div></div>
+            <div>75%</div>
+          </div>
+          <div class="bar-row">
+            <div>Main Building B</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 75%;"></div></div>
+            <div>75%</div>
+          </div>
+          <div class="bar-row">
+            <div>Main Building A</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 67%;"></div></div>
+            <div>67%</div>
+          </div>
+          <div class="bar-row">
+            <div>Conference Center North</div>
+            <div class="bar-track"><div class="bar-fill" style="width: 0%;"></div></div>
+            <div>0%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Monthly Revenue Trend</h2>
+        <div class="section-subtitle">Revenue derived from charge records</div>
+        <div class="mini-chart">
+          <div class="month-col"><div class="month-bar" style="height: 220px;"></div><div class="month-label">Apr<br>$4,819</div></div>
+          <div class="month-col"><div class="month-bar" style="height: 135px;"></div><div class="month-label">May<br>$2,945</div></div>
+        </div>
+        <div class="footer-note">This mockup now uses values directly computed from the current sample inserts.</div>
+      </div>
+    </section>
+
+    <section class="grid-bottom">
+      <div class="card">
+        <h2 class="section-title">Revenue by Service Category</h2>
+        <div class="section-subtitle">Top three categories plus all remaining services grouped as Other</div>
+        <div class="pie-box"></div>
+        <div class="pie-legend">
+          <div class="legend-row">
+            <div class="legend-left"><span class="dot" style="background:#2563eb"></span>Room</div>
+            <div>54.2%</div>
+          </div>
+          <div class="legend-row">
+            <div class="legend-left"><span class="dot" style="background:#10b981"></span>Event</div>
+            <div>31.6%</div>
+          </div>
+          <div class="legend-row">
+            <div class="legend-left"><span class="dot" style="background:#f59e0b"></span>Food</div>
+            <div>8.9%</div>
+          </div>
+          <div class="legend-row">
+            <div class="legend-left"><span class="dot" style="background:#ef4444"></span>Other</div>
+            <div>5.4%</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="card">
+        <h2 class="section-title">Unavailable Room Summary</h2>
+        <div class="section-subtitle">Rooms not currently available for assignment</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Room</th>
+              <th>Building</th>
+              <th>Wing</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>A202</td>
+              <td>Main Building</td>
+              <td>A</td>
+              <td><span class="status-pill cleaning">cleaning</span></td>
+            </tr>
+            <tr>
+              <td>E102</td>
+              <td>East Tower</td>
+              <td>A</td>
+              <td><span class="status-pill renovation">renovation</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2 class="section-title">Access Card Activity</h2>
+      <div class="section-subtitle">Most frequently accessed rooms based on card_access_log</div>
+      <table>
+        <thead>
+          <tr>
+            <th>Rank</th>
+            <th>Room</th>
+            <th>Access Count</th>
+            <th>Peak Hour</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>1</td>
+            <td>A101</td>
+            <td>4</td>
+            <td>15:00</td>
+          </tr>
+          <tr>
+            <td>2</td>
+            <td>A201</td>
+            <td>4</td>
+            <td>15:00</td>
+          </tr>
+          <tr>
+            <td>3</td>
+            <td>B201</td>
+            <td>4</td>
+            <td>15:00</td>
+          </tr>
+          <tr>
+            <td>4</td>
+            <td>E101</td>
+            <td>4</td>
+            <td>15:00</td>
+          </tr>
+          <tr>
+            <td>5</td>
+            <td>A102</td>
+            <td>2</td>
+            <td>15:00</td>
+          </tr>
+        </tbody>
+      </table>
+    </section>
+
+    <div class="detail-grid">
+      <section class="card">
+        <h2 class="section-title">Room Hierarchy / Room Directory</h2>
+        <div class="section-subtitle">Example rows joined from room, floor, wing, and building</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Room ID</th>
+              <th>Room Number</th>
+              <th>Base Rate</th>
+              <th>Floor</th>
+              <th>Wing</th>
+              <th>Building</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>101</td>
+              <td>A101</td>
+              <td>$120.00</td>
+              <td>1</td>
+              <td>A</td>
+              <td>Main Building</td>
+            </tr>
+            <tr>
+              <td>104</td>
+              <td>A201</td>
+              <td>$150.00</td>
+              <td>2</td>
+              <td>A</td>
+              <td>Main Building</td>
+            </tr>
+            <tr>
+              <td>111</td>
+              <td>E101</td>
+              <td>$180.00</td>
+              <td>1</td>
+              <td>A</td>
+              <td>East Tower</td>
+            </tr>
+            <tr>
+              <td>119</td>
+              <td>N101</td>
+              <td>$400.00</td>
+              <td>1</td>
+              <td>North</td>
+              <td>Conference Center</td>
+            </tr>
+            <tr>
+              <td>124</td>
+              <td>S201</td>
+              <td>$360.00</td>
+              <td>2</td>
+              <td>South</td>
+              <td>Conference Center</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">Room Reservation Lookup</h2>
+        <div class="section-subtitle">Example reservation records connected to specific rooms</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Reservation ID</th>
+              <th>Room Number</th>
+              <th>Start</th>
+              <th>End</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>A101</td>
+              <td>2026-04-12 14:00</td>
+              <td>2026-04-14 12:00</td>
+            </tr>
+            <tr>
+              <td>7</td>
+              <td>E101</td>
+              <td>2026-04-15 14:00</td>
+              <td>2026-04-18 12:00</td>
+            </tr>
+            <tr>
+              <td>8</td>
+              <td>W101</td>
+              <td>2026-04-15 14:00</td>
+              <td>2026-04-19 12:00</td>
+            </tr>
+            <tr>
+              <td>12</td>
+              <td>A102</td>
+              <td>2026-04-20 14:00</td>
+              <td>2026-04-23 12:00</td>
+            </tr>
+            <tr>
+              <td>20</td>
+              <td>W202</td>
+              <td>2026-04-25 14:00</td>
+              <td>2026-04-28 12:00</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">Event Schedule Detail</h2>
+        <div class="section-subtitle">Example rows joined from event, host, person, event_room, and room</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Event</th>
+              <th>Host</th>
+              <th>Date</th>
+              <th>Room</th>
+              <th>Usage Slot</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>Event 1</td>
+              <td>Doris Yao</td>
+              <td>2026-05-01</td>
+              <td>N101</td>
+              <td>morning</td>
+            </tr>
+            <tr>
+              <td>Event 1</td>
+              <td>Doris Yao</td>
+              <td>2026-05-01</td>
+              <td>N101</td>
+              <td>afternoon</td>
+            </tr>
+            <tr>
+              <td>Event 2</td>
+              <td>Ethan Xie</td>
+              <td>2026-05-02</td>
+              <td>N102</td>
+              <td>morning</td>
+            </tr>
+            <tr>
+              <td>Event 2</td>
+              <td>Ethan Xie</td>
+              <td>2026-05-02</td>
+              <td>N102</td>
+              <td>lunch</td>
+            </tr>
+            <tr>
+              <td>Event 3</td>
+              <td>Fiona Dong</td>
+              <td>2026-05-03</td>
+              <td>N201</td>
+              <td>morning</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+
+      <section class="card">
+        <h2 class="section-title">Guest Stay and Billing Summary</h2>
+        <div class="section-subtitle">Example rows joined from stay, person, room_assignment, and charge</div>
+        <table>
+          <thead>
+            <tr>
+              <th>Guest</th>
+              <th>Check-in</th>
+              <th>Check-out</th>
+              <th>Assigned Rooms</th>
+              <th>Total Charges</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>John Doe</td>
+              <td>2026-04-12</td>
+              <td>2026-04-14</td>
+              <td>A101</td>
+              <td>$315</td>
+            </tr>
+            <tr>
+              <td>Alice Smith</td>
+              <td>2026-04-12</td>
+              <td>2026-04-13</td>
+              <td>A102</td>
+              <td>$153</td>
+            </tr>
+            <tr>
+              <td>Bob Brown</td>
+              <td>2026-04-13</td>
+              <td>2026-04-16</td>
+              <td>A201</td>
+              <td>$551</td>
+            </tr>
+            <tr>
+              <td>Cathy Lee</td>
+              <td>2026-04-13</td>
+              <td>2026-04-15</td>
+              <td>A203</td>
+              <td>$355</td>
+            </tr>
+            <tr>
+              <td>David Kim</td>
+              <td>2026-04-14</td>
+              <td>2026-04-16</td>
+              <td>B101</td>
+              <td>$238</td>
+            </tr>
+          </tbody>
+        </table>
+      </section>
+    </div>
+  </div>
+</body>
+</html>
