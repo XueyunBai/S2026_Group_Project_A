@@ -1,0 +1,276 @@
+101|A101|120.0|1|A|Main Building
+102|A102|120.0|1|A|Main Building
+103|A103|135.0|1|A|Main Building
+104|A201|150.0|2|A|Main Building
+105|A202|150.0|2|A|Main Building
+106|A203|165.0|2|A|Main Building
+107|B101|110.0|1|B|Main Building
+108|B102|110.0|1|B|Main Building
+109|B201|145.0|2|B|Main Building
+110|B202|145.0|2|B|Main Building
+111|E101|180.0|1|A|East Tower
+112|E102|180.0|1|A|East Tower
+113|E201|210.0|2|A|East Tower
+114|E202|210.0|2|A|East Tower
+115|W101|175.0|1|B|East Tower
+116|W201|220.0|2|B|East Tower
+117|W202|220.0|2|B|East Tower
+118|C201|260.0|2|North|Conference Center
+119|N101|400.0|1|North|Conference Center
+120|N102|450.0|1|North|Conference Center
+121|N201|500.0|2|North|Conference Center
+122|S101|320.0|1|South|Conference Center
+123|S102|340.0|1|South|Conference Center
+124|S201|360.0|2|South|Conference Center
+102|A102|available
+106|A203|available
+109|B201|available
+110|B202|available
+119|N101|available
+120|N102|available
+121|N201|available
+122|S101|available
+123|S102|available
+124|S201|available
+1|101|A101|1|101|A101
+2|102|A102|2|102|A102
+3|104|A201|3|104|A201
+4|106|A203|4|106|A203
+5|107|B101|5|107|B101
+6|109|B201|6|109|B201
+7|111|E101|7|111|E101
+7|113|E201|7|113|E201
+8|114|E202|8|114|E202
+8|115|W101|||
+9|116|W201|9|116|W201
+10|117|W202|10|117|W202
+10|118|C201|||
+11|118|C201|||
+12|101|A101|11|101|A101
+12|102|A102|11|102|A102
+13|104|A201|12|104|A201
+14|106|A203|||
+15|107|B101|||
+16|109|B201|13|109|B201
+16|110|B202|13|110|B202
+17|111|E101|14|111|E101
+17|113|E201|||
+18|114|E202|||
+19|115|W101|15|115|W101
+19|116|W201|||
+20|117|W202|||
+20|118|C201|||
+1|2026-05-01 09:00|2026-05-01 17:00|N101|afternoon
+1|2026-05-01 09:00|2026-05-01 17:00|N101|morning
+2|2026-05-02 09:00|2026-05-02 17:00|N102|lunch
+2|2026-05-02 09:00|2026-05-02 17:00|N102|morning
+3|2026-05-03 09:00|2026-05-03 17:00|N201|afternoon
+3|2026-05-03 09:00|2026-05-03 17:00|N201|morning
+4|2026-05-04 10:00|2026-05-04 18:00|S101|morning
+5|2026-05-05 08:30|2026-05-05 16:30|S102|afternoon
+5|2026-05-05 08:30|2026-05-05 16:30|S102|lunch
+6|2026-05-06 09:30|2026-05-06 19:00|S201|afternoon
+6|2026-05-06 09:30|2026-05-06 19:00|S201|morning
+7|2026-05-07 09:00|2026-05-07 15:00|N101|evening
+8|2026-05-08 13:00|2026-05-08 21:00|N102|afternoon
+8|2026-05-08 13:00|2026-05-08 21:00|N201|evening
+9|2026-05-09 09:00|2026-05-09 17:00|S102|afternoon
+9|2026-05-09 09:00|2026-05-09 17:00|S101|morning
+10|2026-05-10 09:00|2026-05-10 17:00|S201|evening
+10|2026-05-10 09:00|2026-05-10 17:00|S201|morning
+1|John|Doe|11|48.0|2026-04-13 08:00|Breakfast
+1|John|Doe|18|12.0|2026-04-13 21:00|Phone charge
+1|John|Doe|20|15.0|2026-04-13 23:00|Internet
+1|John|Doe|1|240.0|2026-04-14 12:00|Room charge for stay 1
+2|Alice|Smith|14|25.0|2026-04-12 20:00|Parking
+2|Alice|Smith|19|8.0|2026-04-12 22:00|Phone charge
+2|Alice|Smith|2|120.0|2026-04-13 12:00|Room charge for stay 2
+3|Bob|Brown|12|86.0|2026-04-14 12:30|Lunch
+3|Bob|Brown|21|15.0|2026-04-15 23:00|Internet
+3|Bob|Brown|3|450.0|2026-04-16 12:00|Room charge for stay 3
+4|Cathy|Lee|15|25.0|2026-04-14 20:00|Parking
+4|Cathy|Lee|4|330.0|2026-04-15 12:00|Room charge for stay 4
+5|David|Kim|16|18.0|2026-04-15 10:00|Laundry
+5|David|Kim|5|220.0|2026-04-16 12:00|Room charge for stay 5
+6|Emma|Wang|17|22.0|2026-04-14 09:00|Laundry
+6|Emma|Wang|6|145.0|2026-04-15 12:00|Room charge for stay 6
+7|Frank|Zhao|34|30.0|2026-04-16 19:00|Parking
+7|Frank|Zhao|7|540.0|2026-04-18 12:00|Room charge for stay 7
+8|Grace|Liu|35|25.0|2026-04-17 09:30|Laundry
+8|Grace|Liu|31|90.0|2026-04-18 17:00|Spa
+8|Grace|Liu|8|840.0|2026-04-19 12:00|Room charge for stay 8
+9|Henry|Sun|32|120.0|2026-04-17 18:00|Spa
+9|Henry|Sun|9|440.0|2026-04-18 12:00|Room charge for stay 9
+10|Ivy|Xu|33|15.0|2026-04-19 23:00|Internet
+10|Ivy|Xu|10|880.0|2026-04-20 12:00|Room charge for stay 10
+11|Jack|Chen|13|60.0|2026-04-18 18:00|Dinner
+1|28|125.0|2026-05-01 12:00|Catering
+1|22|300.0|2026-05-01 17:00|Event room usage
+2|29|160.0|2026-05-02 12:30|Catering
+2|23|450.0|2026-05-02 17:00|Event room usage
+3|30|210.0|2026-05-03 13:00|Catering
+3|24|600.0|2026-05-03 17:00|Event room usage
+4|25|180.0|2026-05-04 18:00|Event room usage
+5|26|220.0|2026-05-05 16:30|Event room usage
+6|27|700.0|2026-05-06 19:00|Event room usage
+1|240.0|1|John|Doe|
+2|120.0|2|Alice|Smith|
+3|450.0|3|Bob|Brown|
+4|330.0|4|Cathy|Lee|
+5|220.0|5|David|Kim|
+6|145.0|6|Emma|Wang|
+7|540.0|7|Frank|Zhao|
+8|840.0|8|Grace|Liu|
+9|440.0|9|Henry|Sun|
+10|880.0|10|Ivy|Xu|
+11|48.0|1|John|Doe|
+12|86.0|3|Bob|Brown|
+13|60.0|11|||1
+14|25.0|2|Alice|Smith|
+15|25.0|4|Cathy|Lee|
+16|18.0|5|David|Kim|
+17|22.0|6|Emma|Wang|
+18|12.0|1|John|Doe|
+19|8.0|2|Alice|Smith|
+20|15.0|1|John|Doe|
+21|15.0|3|Bob|Brown|
+22|300.0|15|||5
+23|450.0|16|||6
+24|600.0|17|||7
+25|180.0|18|||8
+26|220.0|19|||9
+27|700.0|20|||10
+28|125.0|15|||5
+29|160.0|16|||6
+30|210.0|17|||7
+31|90.0|8|Grace|Liu|
+32|120.0|9|Henry|Sun|
+33|15.0|10|Ivy|Xu|
+34|30.0|7|Frank|Zhao|
+35|25.0|8|Grace|Liu|
+room|4205.0
+event|2450.0
+food|689.0
+spa|210.0
+parking|80.0
+laundry|65.0
+internet|45.0
+phone|20.0
+E202|955.0
+W202|895.0
+N201|810.0
+S201|700.0
+N102|610.0
+E101|570.0
+W201|560.0
+A201|551.0
+N101|425.0
+A203|355.0
+A101|315.0
+B101|238.0
+S102|220.0
+S101|180.0
+B201|167.0
+A102|153.0
+C201|60.0
+A101|Queen|2
+A102|King|1
+A103|Twin|2
+A201|Double|2
+A202|Queen|1
+A203|King|1
+B101|Twin|2
+B102|Double|2
+B201|Queen|1
+B202|King|1
+E101|Queen|2
+E102|King|1
+E201|King|1
+E202|King|1
+W101|Queen|1
+W201|King|1
+W202|King|1
+C201|Sofa Bed|1
+S101|Sofa Bed|1
+S102|Sofa Bed|1
+S201|Rollaway|2
+1|A101|2026-04-12 15:00|enter
+1|A101|2026-04-12 18:00|exit
+2|A102|2026-04-12 15:10|enter
+2|A102|2026-04-12 20:10|exit
+3|A201|2026-04-13 15:20|enter
+3|A201|2026-04-13 19:20|exit
+4|A203|2026-04-13 15:30|enter
+4|A203|2026-04-13 21:30|exit
+5|B101|2026-04-14 15:40|enter
+5|B101|2026-04-14 22:00|exit
+6|B201|2026-04-14 15:50|enter
+6|B201|2026-04-14 18:10|exit
+7|E101|2026-04-15 16:00|enter
+7|E101|2026-04-15 19:00|exit
+8|E202|2026-04-15 16:10|enter
+8|E202|2026-04-15 20:00|exit
+9|W201|2026-04-16 16:20|enter
+9|W201|2026-04-16 21:10|exit
+10|W202|2026-04-16 16:30|enter
+10|W202|2026-04-16 19:45|exit
+11|A101|2026-04-20 15:00|enter
+11|A101|2026-04-20 22:30|exit
+12|A201|2026-04-21 15:00|enter
+12|A201|2026-04-21 19:30|exit
+13|B201|2026-04-22 15:00|enter
+13|B201|2026-04-22 18:20|exit
+14|E101|2026-04-23 15:00|enter
+14|E101|2026-04-23 20:20|exit
+15|W101|2026-04-24 15:00|enter
+15|W101|2026-04-24 21:30|exit
+16|N101|2026-05-01 08:40|enter
+17|N102|2026-05-02 08:45|enter
+18|N201|2026-05-03 08:50|enter
+19|S101|2026-05-04 08:55|enter
+20|S102|2026-05-05 09:00|enter
+21|S201|2026-05-06 09:05|enter
+22|N101|2026-05-07 09:10|enter
+23|N102|2026-05-08 09:15|enter
+24|N201|2026-05-09 09:20|enter
+25|S101|2026-05-10 09:25|enter
+John|Doe|A101|2026-04-12 15:00|enter
+John|Doe|A101|2026-04-12 18:00|exit
+Alice|Smith|A102|2026-04-12 15:10|enter
+Alice|Smith|A102|2026-04-12 20:10|exit
+Bob|Brown|A201|2026-04-13 15:20|enter
+Bob|Brown|A201|2026-04-13 19:20|exit
+Cathy|Lee|A203|2026-04-13 15:30|enter
+Cathy|Lee|A203|2026-04-13 21:30|exit
+David|Kim|B101|2026-04-14 15:40|enter
+David|Kim|B101|2026-04-14 22:00|exit
+Emma|Wang|B201|2026-04-14 15:50|enter
+Emma|Wang|B201|2026-04-14 18:10|exit
+Frank|Zhao|E101|2026-04-15 16:00|enter
+Frank|Zhao|E101|2026-04-15 19:00|exit
+Grace|Liu|E202|2026-04-15 16:10|enter
+Grace|Liu|E202|2026-04-15 20:00|exit
+Henry|Sun|W201|2026-04-16 16:20|enter
+Henry|Sun|W201|2026-04-16 21:10|exit
+Ivy|Xu|W202|2026-04-16 16:30|enter
+Ivy|Xu|W202|2026-04-16 19:45|exit
+Jack|Chen|A101|2026-04-20 15:00|enter
+Jack|Chen|A101|2026-04-20 22:30|exit
+Karen|Wu|A201|2026-04-21 15:00|enter
+Karen|Wu|A201|2026-04-21 19:30|exit
+Leo|Yang|B201|2026-04-22 15:00|enter
+Leo|Yang|B201|2026-04-22 18:20|exit
+Mia|Huang|E101|2026-04-23 15:00|enter
+Mia|Huang|E101|2026-04-23 20:20|exit
+Noah|Lin|W101|2026-04-24 15:00|enter
+Noah|Lin|W101|2026-04-24 21:30|exit
+Olivia|Gao|N101|2026-05-01 08:40|enter
+Peter|Zhang|N102|2026-05-02 08:45|enter
+Queenie|He|N201|2026-05-03 08:50|enter
+Ryan|Ma|S101|2026-05-04 08:55|enter
+Sophia|Tang|S102|2026-05-05 09:00|enter
+Thomas|Li|S201|2026-05-06 09:05|enter
+Uma|Peng|N101|2026-05-07 09:10|enter
+Victor|Cao|N102|2026-05-08 09:15|enter
+Wendy|Ren|N201|2026-05-09 09:20|enter
+Xavier|Jin|S101|2026-05-10 09:25|enter
