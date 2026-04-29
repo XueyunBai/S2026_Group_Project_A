@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="page-title-card">
+    <p class="eyebrow">Guest Operations</p>
+    <h1>Check In / Check Out</h1>
+    <p>Manage guest stays, assign rooms, and update room occupancy status.</p>
+</section>
+
+<section class="split-layout">
+    <div class="form-card">
+        <h2>New Check-In</h2>
+        <form method="POST" class="search-form">
+            <input type="hidden" name="action" value="checkin">
+
+            <label>Guest</label>
+            <select name="guestId" required>
+                {% for guest in guests %}
+                <option value="{{ guest.guestId }}">
+                    {{ guest.first_name }} {{ guest.last_name }} · Guest {{ guest.guestId }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <label>Assigned Room</label>
+            <select name="roomId" required>
+                {% for room in rooms %}
+                <option value="{{ room.roomID }}">
+                    Room {{ room.roomNumber }} · {{ room.roomStatus }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <label>Check-In Time</label>
+            <input type="datetime-local" name="checkIn" required>
+
+            <label>Expected Check-Out Time</label>
+            <input type="datetime-local" name="checkOut" required>
+
+            <button type="submit">Check In Guest</button>
+        </form>
+    </div>
+
+    <div class="form-card">
+        <h2>Check-Out</h2>
+        <form method="POST" class="search-form">
+            <input type="hidden" name="action" value="checkout">
+
+            <label>Active Stay</label>
+            <select name="stayId" required>
+                {% for stay in active_stays %}
+                <option value="{{ stay.stayId }}">
+                    Stay {{ stay.stayId }} · {{ stay.first_name }} {{ stay.last_name }} · Room {{ stay.roomNumber }}
+                </option>
+                {% endfor %}
+            </select>
+
+            <button type="submit">Check Out Guest</button>
+        </form>
+    </div>
+</section>
+
+<section class="report-section">
+    <h2>Current / Recent Stays</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Stay ID</th>
+                <th>Guest</th>
+                <th>Assigned Room</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stay in active_stays %}
+            <tr>
+                <td>{{ stay.stayId }}</td>
+                <td>{{ stay.first_name }} {{ stay.last_name }}</td>
+                <td><span class="status-badge">Room {{ stay.roomNumber }}</span></td>
+                <td>{{ stay.checkIn }}</td>
+                <td>{{ stay.checkOut }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% endblock %}

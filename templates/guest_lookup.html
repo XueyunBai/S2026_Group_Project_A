@@ -1,0 +1,106 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="page-title-card">
+    <p class="eyebrow">Guest Services</p>
+    <h1>Guest Lookup</h1>
+    <p>Search guests and review their stay history and related charges.</p>
+</section>
+
+<section class="form-card">
+    <form method="POST" class="search-form">
+        <label>Search Guest Name</label>
+        <input type="text" name="keyword" placeholder="Example: John or Smith" value="{{ keyword }}" required>
+        <button type="submit">Search Guest</button>
+    </form>
+</section>
+
+{% if guests %}
+<section class="report-section">
+    <h2>Search Results</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Guest ID</th>
+                <th>Name</th>
+                <th>Phone</th>
+                <th>Email</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for guest in guests %}
+            <tr>
+                <td>{{ guest.guestId }}</td>
+                <td>{{ guest.first_name }} {{ guest.last_name }}</td>
+                <td>{{ guest.phone }}</td>
+                <td>{{ guest.email }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section class="report-section">
+    <h2>Stay History</h2>
+    {% if stays %}
+    <table>
+        <thead>
+            <tr>
+                <th>Stay ID</th>
+                <th>Room</th>
+                <th>Check In</th>
+                <th>Check Out</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for stay in stays %}
+            <tr>
+                <td>{{ stay.stayId }}</td>
+                <td>{{ stay.roomNumber if stay.roomNumber else 'N/A' }}</td>
+                <td>{{ stay.checkIn }}</td>
+                <td>{{ stay.checkOut }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No stay history found.</p>
+    {% endif %}
+</section>
+
+<section class="report-section">
+    <h2>Guest Charges</h2>
+    {% if charges %}
+    <table>
+        <thead>
+            <tr>
+                <th>Charge ID</th>
+                <th>Service</th>
+                <th>Amount</th>
+                <th>Time</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for charge in charges %}
+            <tr>
+                <td>{{ charge.chargeId }}</td>
+                <td>{{ charge.serviceType }}</td>
+                <td>${{ '%.2f'|format(charge.amount) }}</td>
+                <td>{{ charge.chargeDateTime }}</td>
+                <td>{{ charge.description if charge.description else 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+    <p>No charges found for this guest.</p>
+    {% endif %}
+</section>
+{% elif keyword %}
+<section class="detail-card">
+    <p>No guest found.</p>
+</section>
+{% endif %}
+
+{% endblock %}

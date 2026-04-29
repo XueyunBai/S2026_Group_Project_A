@@ -1,0 +1,61 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="page-title-card">
+    <p class="eyebrow">Room Operations</p>
+    <h1>Maintenance & Room Status</h1>
+    <p>Update room status for cleaning, renovation, maintenance, or availability.</p>
+</section>
+
+<section class="form-card">
+    <h2>Update Room Status</h2>
+    <form method="POST" class="search-form">
+        <label>Room</label>
+        <select name="roomId" required>
+            {% for room in rooms %}
+            <option value="{{ room.roomID }}">
+                Room {{ room.roomNumber }} · {{ room.buildingName }} · {{ room.roomStatus }}
+            </option>
+            {% endfor %}
+        </select>
+
+        <label>New Status</label>
+        <select name="roomStatus" required>
+            <option value="available">available</option>
+            <option value="occupied">occupied</option>
+            <option value="cleaning">cleaning</option>
+            <option value="renovation">renovation</option>
+            <option value="maintenance">maintenance</option>
+        </select>
+
+        <button type="submit">Update Status</button>
+    </form>
+</section>
+
+<section class="report-section">
+    <h2>Room Status Overview</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Room</th>
+                <th>Building</th>
+                <th>Wing</th>
+                <th>Floor</th>
+                <th>Status</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td>{{ room.roomNumber }}</td>
+                <td>{{ room.buildingName }}</td>
+                <td>{{ room.wingName }}</td>
+                <td>{{ room.floorNumber }}</td>
+                <td><span class="status-badge">{{ room.roomStatus }}</span></td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% endblock %}

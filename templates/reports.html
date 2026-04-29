@@ -1,0 +1,238 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+<section class="page-title-card">
+    <p class="eyebrow">Analytics Dashboard</p>
+    <h1>Reports</h1>
+    <p>
+        This page summarizes revenue, room performance, event usage,
+        guest stay patterns, and billing responsibility.
+    </p>
+</section>
+
+<section class="dashboard-grid">
+    <div class="chart-card">
+        <h2>Revenue by Service Type</h2>
+        <canvas id="serviceChart"></canvas>
+    </div>
+
+    <div class="chart-card">
+        <h2>Room Status Overview</h2>
+        <canvas id="statusChart"></canvas>
+    </div>
+
+    <div class="chart-card wide-chart">
+        <h2>Top Room Revenue</h2>
+        <canvas id="roomChart"></canvas>
+    </div>
+</section>
+
+<section class="report-section">
+    <h2>Revenue by Service Type</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Service Type</th>
+                <th>Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in revenue_by_service %}
+            <tr>
+                <td>{{ row.serviceType }}</td>
+                <td>${{ '%.2f'|format(row.revenue) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section class="report-section">
+    <h2>Revenue by Room</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                <th>Total Revenue</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in revenue_by_room %}
+            <tr>
+                <td>{{ row.roomNumber }}</td>
+                <td>${{ '%.2f'|format(row.totalRevenue) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section class="report-section">
+    <h2>Guests with Multiple Stays</h2>
+    {% if guests_multiple_stays %}
+    <table>
+        <thead>
+            <tr>
+                <th>Guest ID</th>
+                <th>Name</th>
+                <th>Stay Count</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in guests_multiple_stays %}
+            <tr>
+                <td>{{ row.guestId }}</td>
+                <td>{{ row.first_name }} {{ row.last_name }}</td>
+                <td>{{ row.stayCount }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No guests currently have multiple stays in the sample data.</p>
+    {% endif %}
+</section>
+
+<section class="report-section">
+    <h2>Event Schedule and Rooms Used</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Event ID</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Room</th>
+                <th>Usage Slot</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in event_schedule %}
+            <tr>
+                <td>{{ row.eventId }}</td>
+                <td>{{ row.startDate }}</td>
+                <td>{{ row.endDate }}</td>
+                <td>{{ row.roomNumber }}</td>
+                <td>{{ row.usageSlot }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section class="report-section">
+    <h2>Charge Ownership and Billing Responsibility</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Charge ID</th>
+                <th>Service</th>
+                <th>Amount</th>
+                <th>Charge Time</th>
+                <th>Room</th>
+                <th>Belongs To</th>
+                <th>Reference</th>
+                <th>Billing Party</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in charges_with_owner %}
+            <tr>
+                <td>{{ row.chargeId }}</td>
+                <td>{{ row.serviceType }}</td>
+                <td>${{ '%.2f'|format(row.amount) }}</td>
+                <td>{{ row.chargeDateTime }}</td>
+                <td>{{ row.roomNumber if row.roomNumber else 'N/A' }}</td>
+                <td><span class="status-badge">{{ row.belongsTo }}</span></td>
+                <td>
+                    {% if row.stayId %}
+                        Stay {{ row.stayId }}
+                    {% elif row.eventId %}
+                        Event {{ row.eventId }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>
+                    {% if row.first_name %}
+                        {{ row.first_name }} {{ row.last_name }}
+                    {% elif row.organizationId %}
+                        Organization {{ row.organizationId }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>{{ row.description if row.description else 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<script>
+const gold = "#d4af37";
+const navy = "#0b1220";
+const blue = "#1f3c88";
+const teal = "#22c55e";
+const red = "#ef4444";
+const purple = "#8b5cf6";
+
+new Chart(document.getElementById("serviceChart"), {
+    type: "bar",
+    data: {
+        labels: {{ service_labels|tojson }},
+        datasets: [{
+            label: "Revenue",
+            data: {{ service_data|tojson }},
+            backgroundColor: gold,
+            borderRadius: 8
+        }]
+    },
+    options: {
+        plugins: { legend: { display: false } },
+        scales: {
+            y: { beginAtZero: true },
+            x: { grid: { display: false } }
+        }
+    }
+});
+
+new Chart(document.getElementById("statusChart"), {
+    type: "doughnut",
+    data: {
+        labels: {{ status_labels|tojson }},
+        datasets: [{
+            data: {{ status_data|tojson }},
+            backgroundColor: [blue, gold, teal, red, purple]
+        }]
+    },
+    options: {
+        plugins: { legend: { position: "bottom" } }
+    }
+});
+
+new Chart(document.getElementById("roomChart"), {
+    type: "bar",
+    data: {
+        labels: {{ room_labels|tojson }},
+        datasets: [{
+            label: "Room Revenue",
+            data: {{ room_data|tojson }},
+            backgroundColor: "#1f3c88",
+            borderRadius: 8
+        }]
+    },
+    options: {
+        indexAxis: "y",
+        plugins: { legend: { display: false } },
+        scales: {
+            x: { beginAtZero: true },
+            y: { grid: { display: false } }
+        }
+    }
+});
+</script>
+
+{% endblock %}

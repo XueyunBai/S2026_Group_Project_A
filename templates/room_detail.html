@@ -1,0 +1,95 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<div class="room-detail-header">
+    <img src="{{ url_for('static', filename='images/' + room_image) }}" alt="Resort room">
+
+    <div class="room-detail-header-text">
+        <p class="eyebrow">Room Details</p>
+        <h1>Room {{ room.roomNumber }}</h1>
+
+        <p>{{ room.buildingName }} · Wing {{ room.wingName }} · Floor {{ room.floorNumber }}</p>
+
+        <p>
+            <span class="status-badge">{{ room.roomStatus }}</span>
+            &nbsp; Base Rate: ${{ '%.2f'|format(room.baseRate) }}
+        </p>
+
+        <p>
+            {% if room.seatingCapacity is not none and room.capacity is not none %}
+                Suite / Multi-Function Room
+            {% elif room.seatingCapacity is not none %}
+                Meeting Room
+            {% elif room.capacity is not none %}
+                Sleeping Room
+            {% else %}
+                General Room
+            {% endif %}
+        </p>
+    </div>
+</div>
+
+<section class="detail-card">
+    <h2>Basic Information</h2>
+    <p><strong>Building:</strong> {{ room.buildingName }}</p>
+    <p><strong>Wing:</strong> {{ room.wingName }}</p>
+    <p><strong>Floor:</strong> {{ room.floorNumber }}</p>
+    <p><strong>Base Rate:</strong> ${{ '%.2f'|format(room.baseRate) }}</p>
+    <p><strong>Status:</strong> {{ room.roomStatus }}</p>
+    <p><strong>Floor Smoking Designation:</strong> {{ room.smokingDesignation }}</p>
+</section>
+
+<section class="detail-card">
+    <h2>Room Function & Features</h2>
+    <p><strong>Sleeping Capacity:</strong> {{ room.capacity if room.capacity is not none else 'N/A' }}</p>
+    <p><strong>Meeting Seating Capacity:</strong> {{ room.seatingCapacity if room.seatingCapacity is not none else 'N/A' }}</p>
+    <p><strong>Has Toilet:</strong> {{ 'Yes' if room.hasToilet == 1 else 'No' if room.hasToilet == 0 else 'N/A' }}</p>
+    <p><strong>Has TV:</strong> {{ 'Yes' if room.hasTV == 1 else 'No' if room.hasTV == 0 else 'N/A' }}</p>
+    <p><strong>Has Phone:</strong> {{ 'Yes' if room.hasPhone == 1 else 'No' if room.hasPhone == 0 else 'N/A' }}</p>
+</section>
+
+<section class="detail-card">
+    <h2>Wing Amenities</h2>
+    <p><strong>Near Pool:</strong> {{ 'Yes' if room.proximityPool == 1 else 'No' }}</p>
+    <p><strong>Near Parking:</strong> {{ 'Yes' if room.proximityParking == 1 else 'No' }}</p>
+    <p><strong>Handicapped Access:</strong> {{ 'Yes' if room.handicappedAccess == 1 else 'No' }}</p>
+</section>
+
+<section class="detail-card">
+    <h2>Bed Configuration</h2>
+    {% if beds %}
+        <ul>
+            {% for bed in beds %}
+                <li>{{ bed.quantity }} × {{ bed.size }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No bed data available.</p>
+    {% endif %}
+</section>
+
+<section class="detail-card">
+    <h2>Adjacent Rooms</h2>
+    {% if adjacent_rooms %}
+        <ul>
+            {% for adj in adjacent_rooms %}
+                <li>
+                    Room {{ adj.roomNumber }}
+                    {% if adj.hasPrivateDoor == 1 %}
+                        — private-access door
+                    {% else %}
+                        — adjacent room
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No adjacent room information.</p>
+    {% endif %}
+</section>
+
+<p>
+    <a class="button-link" href="{{ url_for('rooms') }}">Back to Rooms</a>
+</p>
+
+{% endblock %}

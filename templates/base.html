@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Last Resort Hotels</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+
+<body>
+
+<header>
+    <div class="header-left">
+        <a href="{{ url_for('home') }}" class="site-title">Last Resort Hotels</a>
+    </div>
+
+    <nav class="header-nav">
+        <a href="{{ url_for('home') }}">Home</a>
+        <a href="{{ url_for('rooms') }}">Rooms</a>
+        <a href="{{ url_for('availability') }}">Availability</a>
+        <a href="{{ url_for('events') }}">Events</a>
+        <a href="{{ url_for('checkin') }}">Check In/Out</a>
+        <a href="{{ url_for('maintenance') }}">Room Status</a>
+        <a href="{{ url_for('guest_lookup') }}">Guests</a>
+        <a href="{{ url_for('access') }}">Access</a>
+        <a href="{{ url_for('billing') }}">Billing</a>
+        <a href="{{ url_for('reports') }}">Reports</a>
+    </nav>
+</header>
+
+<main class="page-container">
+    {% block content %}{% endblock %}
+</main>
+
+<footer>
+    <p>CSCI-UA 60 Project · Last Resort Hotels Operations System</p>
+</footer>
+
+</body>
+</html>

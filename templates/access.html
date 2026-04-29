@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="page-title-card">
+    <p class="eyebrow">Access Tracking</p>
+    <h1>Guest Card Access Logs</h1>
+    <p>Track guest movement using access cards (enter/exit + room usage).</p>
+</section>
+
+<section class="report-section">
+
+    <table>
+        <thead>
+            <tr>
+                <th>Log ID</th>
+                <th>Guest</th>
+                <th>Card</th>
+                <th>Room</th>
+                <th>Time</th>
+                <th>Direction</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for log in access_logs %}
+            <tr>
+                <td>{{ log.logId }}</td>
+                <td>{{ log.first_name }} {{ log.last_name }}</td>
+                <td>{{ log.cardId }}</td>
+                <td>Room {{ log.roomNumber }}</td>
+                <td>{{ log.accessTime }}</td>
+                <td>
+                    <span class="status-badge">
+                        {{ log.direction }}
+                    </span>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</section>
+
+{% endblock %}

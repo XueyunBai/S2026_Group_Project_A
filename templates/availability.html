@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="page-title-card">
+    <p class="eyebrow">Reservation Operations</p>
+    <h1>Room Availability Search</h1>
+    <p>Search available resort rooms by date and time, based on reservation records and current room status.</p>
+</section>
+
+<section class="form-card">
+    <h2>Search Date Range</h2>
+
+    <form method="POST" class="search-form">
+        <label for="start">Start Date & Time</label>
+        <input type="datetime-local" id="start" name="start" required>
+
+        <label for="end">End Date & Time</label>
+        <input type="datetime-local" id="end" name="end" required>
+
+        <button type="submit">Search Available Rooms</button>
+    </form>
+</section>
+
+{% if available_rooms is not none %}
+<section class="report-section">
+    <h2>Available Rooms</h2>
+    <p><strong>From:</strong> {{ start }} &nbsp;&nbsp; <strong>To:</strong> {{ end }}</p>
+
+    {% if available_rooms %}
+    <table>
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                <th>Base Rate</th>
+                <th>Status</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in available_rooms %}
+            <tr>
+                <td>{{ room.roomNumber }}</td>
+                <td>${{ '%.2f'|format(room.baseRate) }}</td>
+                <td><span class="status-badge">{{ room.roomStatus }}</span></td>
+                <td>
+                    <a class="small-link" href="{{ url_for('room_detail', room_id=room.roomID) }}">
+                        View Room
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+    {% else %}
+        <p>No rooms are available for this date range.</p>
+    {% endif %}
+</section>
+{% endif %}
+
+{% endblock %}

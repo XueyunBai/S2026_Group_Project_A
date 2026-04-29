@@ -1,0 +1,92 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="lux-hero">
+    <div class="lux-hero-content">
+        <p class="eyebrow">Last Resort Hotels</p>
+        <h1>Resort Operations Database System</h1>
+        <p>
+            A database system designed to help resort staff manage rooms, reservations,
+            guest stays, events, billing, services, and access tracking across large hotel complexes.
+        </p>
+        <div class="hero-buttons">
+            <a class="hero-button" href="{{ url_for('rooms') }}">Browse Rooms</a>
+            <a class="hero-button hero-button-secondary" href="{{ url_for('availability') }}">Check Availability</a>
+            <a class="hero-button hero-button-gold" href="{{ url_for('events') }}">View Events</a>
+        </div>
+    </div>
+</section>
+
+<section class="stats-grid">
+    <div class="stat-card"><span>Buildings</span><h2>{{ stats.building_count }}</h2></div>
+    <div class="stat-card"><span>Total Rooms</span><h2>{{ stats.room_count }}</h2></div>
+    <div class="stat-card"><span>Available Rooms</span><h2>{{ stats.available_room_count }}</h2></div>
+    <div class="stat-card"><span>Events</span><h2>{{ stats.event_count }}</h2></div>
+    <div class="stat-card"><span>Total Revenue</span><h2>${{ stats.total_revenue }}</h2></div>
+</section>
+
+<section class="section-heading">
+    <p class="eyebrow">Core Resort Functions</p>
+    <h2>Manage Hotel Operations</h2>
+</section>
+
+<section class="feature-grid">
+    <a class="feature-card" href="{{ url_for('rooms') }}">
+        <img src="{{ url_for('static', filename='images/rooms.jpg') }}" alt="Rooms">
+        <div><h3>Rooms & Facilities</h3><p>View room hierarchy, room type, bed setup, status, and adjacent rooms.</p></div>
+    </a>
+
+    <a class="feature-card" href="{{ url_for('availability') }}">
+        <img src="{{ url_for('static', filename='images/availability.jpg') }}" alt="Availability">
+        <div><h3>Reservation Availability</h3><p>Search available rooms by date range and current room status.</p></div>
+    </a>
+
+    <a class="feature-card" href="{{ url_for('events') }}">
+        <img src="{{ url_for('static', filename='images/events.jpg') }}" alt="Events">
+        <div><h3>Events & Meeting Rooms</h3><p>Track event hosts, attendance, room usage, and meeting room time slots.</p></div>
+    </a>
+
+    <a class="feature-card" href="{{ url_for('checkin') }}">
+        <img src="{{ url_for('static', filename='images/checkin.jpg') }}" alt="Check in">
+        <div><h3>Check In / Check Out</h3><p>Assign guests to rooms and update actual stay information.</p></div>
+    </a>
+
+    <a class="feature-card" href="{{ url_for('guest_lookup') }}">
+        <img src="{{ url_for('static', filename='images/guest-search.jpg') }}" alt="Guest lookup">
+        <div><h3>Guest Lookup</h3><p>Search guests and review stay history, room assignments, and charges.</p></div>
+    </a>
+
+    <a class="feature-card" href="{{ url_for('billing') }}">
+        <img src="{{ url_for('static', filename='images/billing.jpg') }}" alt="Billing">
+        <div><h3>Billing & Charges</h3><p>Review charges, billing parties, services, stays, and event payments.</p></div>
+    </a>
+</section>
+
+<section class="section-heading">
+    <p class="eyebrow">Resort Experience</p>
+    <h2>Facilities & Guest Services</h2>
+</section>
+
+<section class="feature-grid">
+    <div class="feature-card">
+        <img src="{{ url_for('static', filename='images/ocean-villa.jpg') }}" alt="Ocean villa">
+        <div><h3>Ocean Villas & Suites</h3><p>Luxury sleeping rooms and suites designed for resort guests.</p></div>
+    </div>
+
+    <div class="feature-card">
+        <img src="{{ url_for('static', filename='images/dining.jpg') }}" alt="Dining">
+        <div><h3>Dining & Services</h3><p>Supports charged services such as meals, drinks, delivery, and guest amenities.</p></div>
+    </div>
+
+    <div class="feature-card">
+        <img src="{{ url_for('static', filename='images/spa.jpg') }}" alt="Spa">
+        <div><h3>Spa & Allied Services</h3><p>Represents extra services that may be charged to guests or billing parties.</p></div>
+    </div>
+
+    <div class="feature-card">
+        <img src="{{ url_for('static', filename='images/family-resort.jpg') }}" alt="Family resort">
+        <div><h3>Guest Experience</h3><p>Tracks guest stays, room assignments, access, and billing responsibility.</p></div>
+    </div>
+</section>
+
+{% endblock %}

@@ -1,0 +1,67 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="page-title-card">
+    <p class="eyebrow">Events Management</p>
+    <h1>Events & Meeting Room Usage</h1>
+    <p>Search events by host or date and review room usage and attendance.</p>
+</section>
+
+<div class="split-layout">
+
+    <div class="form-card">
+        <h2>Search Events</h2>
+        <form method="POST" class="search-form">
+            <label>Host Name</label>
+            <input type="text" name="keyword" placeholder="Enter host name" value="{{ keyword }}">
+
+            <label>Date</label>
+            <input type="date" name="date" value="{{ date }}">
+
+            <button type="submit">Search</button>
+        </form>
+    </div>
+
+    <!-- Summary -->
+    <div class="form-card">
+        <h2>Summary</h2>
+        <p><strong>Total Events:</strong> {{ summary.totalEvents }}</p>
+        <p><strong>Total Attendance:</strong> {{ summary.totalAttendance }}</p>
+        <p><strong>Estimated Guest Rooms:</strong> {{ summary.totalGuestRooms }}</p>
+    </div>
+
+</div>
+
+<section class="report-section">
+    <h2>Event Details</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Event ID</th>
+                <th>Host</th>
+                <th>Room</th>
+                <th>Usage Slot</th>
+                <th>Start</th>
+                <th>End</th>
+                <th>Attendance</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for e in events %}
+            <tr>
+                <td>{{ e.eventId }}</td>
+                <td>{{ e.first_name }} {{ e.last_name }}</td>
+                <td>Room {{ e.roomNumber }}</td>
+                <td><span class="status-badge">{{ e.usageSlot }}</span></td>
+                <td>{{ e.startDate }}</td>
+                <td>{{ e.endDate }}</td>
+                <td>{{ e.estimatedAttendance }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+</section>
+
+{% endblock %}

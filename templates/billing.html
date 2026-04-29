@@ -1,0 +1,104 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="page-title-card">
+    <p class="eyebrow">Financial Operations</p>
+    <h1>Billing Review</h1>
+    <p>Search billing parties and review charge ownership, services, stays, events, and responsible payment parties.</p>
+</section>
+
+<div class="split-layout">
+    <section class="form-card">
+        <h2>Search Billing</h2>
+        <form method="POST" class="search-form">
+            <label>Guest Name / Organization ID / Billing Party ID</label>
+            <input type="text" name="keyword" value="{{ keyword }}" placeholder="Example: Grace, 7, or billing party ID">
+            <button type="submit">Search Billing Records</button>
+        </form>
+    </section>
+
+    <section class="form-card">
+        <h2>Billing Summary</h2>
+        <p><strong>Billing Parties:</strong> {{ summary.partyCount }}</p>
+        <p><strong>Total Charges:</strong> {{ summary.chargeCount }}</p>
+        <p><strong>Total Amount:</strong> ${{ '%.2f'|format(summary.totalAmount) }}</p>
+    </section>
+</div>
+
+<section class="report-section">
+    <h2>Billing Party Totals</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Billing Party ID</th>
+                <th>Responsible Party</th>
+                <th>Total Amount</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for row in billing_totals %}
+            <tr>
+                <td>{{ row.billingPartyId }}</td>
+                <td>
+                    {% if row.first_name %}
+                        {{ row.first_name }} {{ row.last_name }}
+                    {% elif row.organizationId %}
+                        Organization {{ row.organizationId }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>${{ '%.2f'|format(row.totalAmount) }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+<section class="report-section">
+    <h2>All Charges</h2>
+    <table>
+        <thead>
+            <tr>
+                <th>Charge ID</th>
+                <th>Service</th>
+                <th>Amount</th>
+                <th>Time</th>
+                <th>Source</th>
+                <th>Billing Party</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for charge in charges %}
+            <tr>
+                <td>{{ charge.chargeId }}</td>
+                <td>{{ charge.serviceType }}</td>
+                <td>${{ '%.2f'|format(charge.amount) }}</td>
+                <td>{{ charge.chargeDateTime }}</td>
+                <td>
+                    {% if charge.stayId %}
+                        <span class="status-badge">Stay {{ charge.stayId }}</span>
+                    {% elif charge.eventId %}
+                        <span class="status-badge">Event {{ charge.eventId }}</span>
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>
+                    {% if charge.first_name %}
+                        {{ charge.first_name }} {{ charge.last_name }}
+                    {% elif charge.organizationId %}
+                        Organization {{ charge.organizationId }}
+                    {% else %}
+                        N/A
+                    {% endif %}
+                </td>
+                <td>{{ charge.description if charge.description else 'N/A' }}</td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% endblock %}

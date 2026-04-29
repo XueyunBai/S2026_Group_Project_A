@@ -1,0 +1,45 @@
+{% extends 'base.html' %}
+{% block content %}
+
+<section class="page-title-card">
+    <p class="eyebrow">Room Inventory</p>
+    <h1>All Rooms</h1>
+    <p>Browse the resort room inventory and open detailed room information, including location, rate, status, features, beds, and adjacent rooms.</p>
+</section>
+
+<section class="report-section">
+    <h2>Room List</h2>
+
+    <table>
+        <thead>
+            <tr>
+                <th>Room Number</th>
+                <th>Building</th>
+                <th>Wing</th>
+                <th>Floor</th>
+                <th>Base Rate</th>
+                <th>Status</th>
+                <th>Details</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for room in rooms %}
+            <tr>
+                <td>{{ room.roomNumber }}</td>
+                <td>{{ room.buildingName }}</td>
+                <td>{{ room.wingName }}</td>
+                <td>{{ room.floorNumber }}</td>
+                <td>${{ '%.2f'|format(room.baseRate) }}</td>
+                <td><span class="status-badge">{{ room.roomStatus }}</span></td>
+                <td>
+                    <a class="small-link" href="{{ url_for('room_detail', room_id=room.roomID) }}">
+                        View Room
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</section>
+
+{% endblock %}
